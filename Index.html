@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CTPhotos — Motorsport & Creative Photography</title>
+  <style>
+    body{margin:0;font-family:sans-serif;background:#0f1121;color:#fff;line-height:1.5}
+    .container{max-width:900px;margin:0 auto;padding:40px 20px}
+    h1,h2,h3{font-weight:800;margin:.5em 0}
+    a{color:#6F5FD1;text-decoration:none}
+    .logo-grid{display:flex;gap:40px;flex-wrap:wrap;margin:40px 0}
+    .logo{flex:1 1 200px;background:#161832;border-radius:16px;padding:20px;display:flex;justify-content:center;align-items:center}
+    svg{width:100%;height:auto;max-width:220px}
+    .order-form{background:#161832;border-radius:16px;padding:20px;margin-top:40px}
+    label{display:block;margin:10px 0 4px}
+    input,select{width:100%;padding:10px;border-radius:8px;border:none;margin-bottom:12px;background:#0f1121;color:#fff}
+    button{padding:12px 18px;border:none;border-radius:12px;background:#6F5FD1;color:#fff;font-weight:700;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CTPhotos Logos</h1>
+    <p>Three racing-focused concepts (SVG, scalable for web/print):</p>
+    <div class="logo-grid">
+      <!-- Option A -->
+      <div class="logo">
+        <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+          <text x="10" y="70" font-size="64" font-weight="bold" fill="white">C</text>
+          <text x="70" y="70" font-size="64" font-weight="bold" fill="white">T</text>
+          <rect x="130" y="25" width="140" height="50" fill="url(#flag)" />
+          <defs>
+            <pattern id="flag" patternUnits="userSpaceOnUse" width="20" height="20">
+              <rect width="10" height="10" fill="white"/>
+              <rect x="10" width="10" height="10" fill="black"/>
+              <rect y="10" width="10" height="10" fill="black"/>
+              <rect x="10" y="10" width="10" height="10" fill="white"/>
+            </pattern>
+          </defs>
+        </svg>
+      </div>
+      <!-- Option B -->
+      <div class="logo">
+        <svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 70 Q60 20 120 40 T250 40 Q300 20 390 60" stroke="#6F5FD1" stroke-width="6" fill="none"/>
+          <text x="40" y="110" font-size="42" font-weight="bold" fill="white">CTPhotos</text>
+        </svg>
+      </div>
+      <!-- Option C -->
+      <div class="logo">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" stroke="#6F5FD1" stroke-width="12" fill="none" stroke-dasharray="30 10"/>
+          <text x="50" y="115" font-size="48" font-weight="bold" fill="white">CT</text>
+        </svg>
+      </div>
+    </div>
+
+    <h2>Order Page</h2>
+    <p>Register and pay for future race photo coverage:</p>
+    <form class="order-form" id="orderForm">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="event">Race Event</label>
+      <input type="text" id="event" name="event" placeholder="Series, Track, Date" required>
+
+      <label for="car">Car/Kart Number</label>
+      <input type="text" id="car" name="car">
+
+      <label for="package">Package</label>
+      <select id="package" name="package">
+        <option value="trackside">Trackside — $349</option>
+        <option value="pro">Pro Pitlane — $699</option>
+        <option value="endurance">Endurance Weekend — $1299</option>
+      </select>
+
+      <button type="button" id="payButton">Proceed to Payment</button>
+    </form>
+  </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    // Replace with your Stripe publishable key
+    const stripe = Stripe('pk_test_xxxxxxxxxxxxxxxxxxxxx');
+
+    document.getElementById('payButton').addEventListener('click', async () => {
+      const checkout = await fetch('/create-checkout-session', { method:'POST' });
+      const session = await checkout.json();
+      stripe.redirectToCheckout({ sessionId: session.id });
+    });
+  </script>
+</body>
+</html>
+
+<!-- ============================= -->
+<!--   ASSETS: LOGO SVG CONCEPTS   -->
+<!-- ============================= -->
+
+<!-- Save each block below as its own .svg file in /assets or paste inline where needed. -->
+
+<!-- 1) CT + Checkered Flag (ctphotos-flag.svg) -->
+<!-- Usage: Dark backgrounds. Works great as app icon / favicon too. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#6F5FD1"/>
+      <stop offset="1" stop-color="#65E2FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" rx="24" fill="#0F1121"/>
+  <!-- CT wordmark -->
+  <g fill="url(#g)" stroke="#FFFFFF" stroke-opacity=".12" stroke-width="2">
+    <path d="M120 146c-40 0-68-30-68-66s28-66 68-66c19 0 34 6 46 16l-20 22c-7-6-16-9-26-9-22 0-36 16-36 37s14 37 36 37c10 0 19-3 26-9l20 22c-12 10-27 16-46 16z"/>
+    <path d="M204 20h40v46h44v32h-44v48c0 12 6 18 18 18 10 0 18-3 26-8l14 30c-12 8-28 14-49 14-33 0-49-17-49-49V20z"/>
+  </g>
+  <!-- Flag from the T crossbar -->
+  <g transform="translate(328,56)" fill="#fff">
+    <rect x="0" y="0" width="28" height="20"/>
+    <rect x="28" y="20" width="28" height="20"/>
+    <rect x="56" y="0" width="28" height="20"/>
+    <rect x="84" y="20" width="28" height="20"/>
+    <rect x="112" y="0" width="28" height="20"/>
+  </g>
+  <text x="40" y="188" fill="#AEB1C8" font-family="Inter,Segoe UI,Arial" font-size="18" letter-spacing="2">CTPHOTOS</text>
+</svg>
+
+<!-- 2) Minimal Car Silhouette (ctphotos-silhouette.svg) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 180" width="640" height="180">
+  <defs>
+    <linearGradient id="g2" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#6F5FD1"/>
+      <stop offset="1" stop-color="#8F7FFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" rx="20" fill="#0F1121"/>
+  <path d="M30 100c90-58 240-66 330-46 22 5 49 12 77 12 30 0 60-8 88-8 13 0 25 2 35 7" fill="none" stroke="url(#g2)" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="175" cy="128" r="18" fill="#0F1121" stroke="#65E2FF" stroke-width="8"/>
+  <circle cx="470" cy="128" r="18" fill="#0F1121" stroke="#65E2FF" stroke-width="8"/>
+  <text x="40" y="164" fill="#fff" font-family="Plus Jakarta Sans,Inter,Arial" font-size="28" font-weight="800">CTPhotos</text>
+</svg>
+
+<!-- 3) Modern Badge (ctphotos-badge.svg) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220">
+  <defs>
+    <radialGradient id="rg" cx="50%" cy="40%" r="70%">
+      <stop offset="0" stop-color="#6F5FD1"/>
+      <stop offset="1" stop-color="#232653"/>
+    </radialGradient>
+  </defs>
+  <circle cx="110" cy="110" r="100" fill="url(#rg)" stroke="#65E2FF" stroke-width="2"/>
+  <path d="M45 110a65 65 0 1 1 65 65" fill="none" stroke="#fff" stroke-opacity=".85" stroke-width="8" stroke-linecap="round"/>
+  <path d="M75 110h70" stroke="#fff" stroke-width="8" stroke-linecap="round"/>
+  <text x="110" y="202" text-anchor="middle" fill="#aeb1c8" font-family="Inter,Arial" font-size="16" letter-spacing="3">CTPHOTOS</text>
+</svg>
+
+
+<!-- ============================= -->
+<!--        ORDER PAGE (HTML)      -->
+<!-- ============================= -->
+<!-- Save the block below as order.html in the same folder as index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book Coverage — CTPhotos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f1121;--panel:#161832;--text:#f2f3f7;--muted:#aeb1c8;--accent:#6F5FD1;--accent2:#65E2FF}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif}
+    .wrap{max-width:980px;margin:0 auto;padding:36px 20px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:22px}
+    h1{font-family:"Plus Jakarta Sans",Inter,sans-serif;font-size:42px;margin:4px 0 8px}
+    p.lead{color:var(--muted);max-width:70ch}
+    form{display:grid;gap:14px;margin-top:18px}
+    label{font-weight:600}
+    input,select,textarea{background:#0f1226;border:1px solid rgba(255,255,255,.12);color:var(--text);padding:14px;border-radius:12px;font:inherit}
+    textarea{min-height:100px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .btn{display:inline-flex;gap:10px;align-items:center;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:linear-gradient(135deg,var(--accent),#8f7fff);font-weight:800}
+    .muted{color:var(--muted)}
+    .grid{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-top:18px}
+    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+    .summary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:16px}
+    .price{font-weight:800;font-size:24px}
+    .nav{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);position:sticky;top:0}
+    .nav .container{max-width:980px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800}
+    .brand .logo{width:28px;height:28px;border-radius:8px;background:conic-gradient(from 220deg,var(--accent),#8f7fff,#65e2ff,var(--accent))}
+    a{color:inherit;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="nav">
+    <div class="container">
+      <a href="./index.html" class="brand"><span class="logo"></span>CTPhotos</a>
+      <a href="./index.html#services">Packages</a>
+    </div>
+  </div>
+  <main class="wrap">
+    <h1>Book Photos for a Future Race</h1>
+    <p class="lead">Lock in coverage now — choose a package and share event details. You’ll get a confirmation email after payment.</p>
+
+    <div class="grid">
+      <form id="orderForm" action="https://formspree.io/f/your-form-id" method="POST" class="card">
+        <div class="two">
+          <div>
+            <label for="name">Driver / Team Name</label>
+            <input id="name" name="name" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+        </div>
+        <div class="two">
+          <div>
+            <label for="series">Series</label>
+            <input id="series" name="series" placeholder="IMSA / SCCA / Club / Karting" />
+          </div>
+          <div>
+            <label for="date">Event Date</label>
+            <input id="date" name="date" type="date" required />
+          </div>
+        </div>
+        <div class="two">
+          <div>
+            <label for="track">Track</label>
+            <input id="track" name="track" placeholder="e.g., Mid‑Ohio" />
+          </div>
+          <div>
+            <label for="car">Car/Kart #</label>
+            <input id="car" name="car" />
+          </div>
+        </div>
+        <div>
+          <label for="package">Package</label>
+          <select id="package" name="package" required>
+            <option value="trackside" data-price="349" data-link="https://buy.stripe.com/your-trackside-link">Trackside — $349</option>
+            <option value="propitlane" data-price="699" data-link="https://buy.stripe.com/your-propitlane-link" selected>Pro Pitlane — $699</option>
+            <option value="endurance" data-price="1299" data-link="https://buy.stripe.com/your-endurance-link">Endurance Weekend — $1299</option>
+          </select>
+        </div>
+        <div>
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" placeholder="Schedule, deliverables, sponsor needs, social handles…"></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="New CTPhotos order" />
+        <input type="hidden" name="_cc" value="book@ctphotos.co" />
+        <button type="submit" class="btn">Submit Details</button>
+        <p class="muted">Submitting details helps me prep; payment is completed with the button on the right →</p>
+      </form>
+
+      <aside class="summary">
+        <h3>Payment</h3>
+        <p>Select your package, then use the button below to pay securely via Stripe Checkout.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <strong>Selected:</strong>
+          <span id="picked" class="price">$699</span>
+        </div>
+        <div style="height:10px"></div>
+        <a id="payBtn" class="btn" href="https://buy.stripe.com/your-propitlane-link">Pay with Stripe</a>
+        <p class="muted" style="margin-top:10px">Stripe supports cards, Apple Pay and Google Pay. You’ll get an email receipt.</p>
+      </aside>
+    </div>
+
+    <p class="muted" style="margin-top:16px">By booking you agree to the delivery terms in the package description. Travel fees may apply for non‑local events.</p>
+  </main>
+
+  <script>
+    const pkg = document.getElementById('package');
+    const picked = document.getElementById('picked');
+    const payBtn = document.getElementById('payBtn');
+    function updatePrice(){
+      const o = pkg.options[pkg.selectedIndex];
+      picked.textContent = `$${o.dataset.price}`;
+      payBtn.href = o.dataset.link;
+    }
+    pkg.addEventListener('change', updatePrice);
+    updatePrice();
+  </script>
+</body>
+</html>
