@@ -5,8 +5,9 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Open Main.html",
+            "name": "index.html",
             "file": "/workspaces/CT-Photos/Main.html"
         }
     ]
+
 }
